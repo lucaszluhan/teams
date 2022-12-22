@@ -1,4 +1,4 @@
-import { ButtonIcon, Header, Highlight, Input } from '@components/index'
+import { ButtonIcon, Filter, Header, Highlight, Input } from '@components/index'
 import { Container, Form } from './style'
 
 export function Players() {
@@ -10,6 +10,7 @@ export function Players() {
         <Input placeholder='Nome da pessoa' autoCorrect={false} />
         <ButtonIcon icon='add' />
       </Form>
+      <Filter title='Time A' isActive />
     </Container>
   )
 }
