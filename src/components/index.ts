@@ -7,5 +7,17 @@ import { Highlight } from './Highlight'
 import { Input } from './Input'
 import { ListEmpty } from './ListEmpty'
 import { Loading } from './Loading'
+import { PlayerCard } from './PlayerCard'
 
-export { Highlight, Loading, Header, GroupCard, ListEmpty, Button, Input, ButtonIcon, Filter }
+export {
+  Highlight,
+  Loading,
+  Header,
+  GroupCard,
+  ListEmpty,
+  Button,
+  Input,
+  ButtonIcon,
+  Filter,
+  PlayerCard,
+}

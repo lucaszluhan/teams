@@ -1,11 +1,19 @@
-import { ButtonIcon, Filter, Header, Highlight, Input } from '@components/index'
+import {
+  ButtonIcon,
+  Filter,
+  Header,
+  Highlight,
+  Input,
+  ListEmpty,
+  PlayerCard,
+} from '@components/index'
 import { useState } from 'react'
 import { FlatList } from 'react-native'
 import { Container, Form, HeaderList, PlayersNumb } from './style'
 
 export function Players() {
   const [team, setTeam] = useState('time a')
-  const [players, setPlayers] = useState(['Lucas', 'Paulo'])
+  const [players, setPlayers] = useState([])
 
   return (
     <Container>
@@ -26,6 +34,14 @@ export function Players() {
         />
         <PlayersNumb>{players.length}</PlayersNumb>
       </HeaderList>
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => <PlayerCard name={item} onRemove={() => {}} />}
+        ListEmptyComponent={() => <ListEmpty message='Não há pessoas nessse time.' />}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={[{ paddingBottom: 100 }, players.length === 0 && { flex: 1 }]}
+      />
     </Container>
   )
 }
