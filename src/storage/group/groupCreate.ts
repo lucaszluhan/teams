@@ -9,7 +9,9 @@ export async function groupCreate(newGroup: string) {
 
     const groupAlreadyExists = storedGroups.includes(newGroup)
 
-    if (groupAlreadyExists) throw new AppError('Grupo já existe!')
+    if (groupAlreadyExists) {
+      throw new AppError('Grupo já existe!')
+    }
 
     await AsyncStorage.setItem(GROUP_COLLECTION, JSON.stringify([...storedGroups, newGroup]))
   } catch (error) {

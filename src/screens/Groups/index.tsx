@@ -1,8 +1,9 @@
 import { Button, GroupCard, Header, Highlight, ListEmpty } from '@components/index'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { groupsGetAll } from '@storage/group/groupsGetAll'
-import { useCallback, useEffect, useState } from 'react'
-import { FlatList } from 'react-native'
+import { AppError } from '@utils/AppError'
+import { useCallback, useState } from 'react'
+import { Alert, FlatList } from 'react-native'
 import { Container } from './style'
 
 export function Groups() {
