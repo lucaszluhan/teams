@@ -6,6 +6,7 @@ import {
   Highlight,
   Input,
   ListEmpty,
+  Loading,
   PlayerCard,
 } from '@components/index'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -27,6 +28,7 @@ export function Players() {
   const newPlayerInputRef = useRef<TextInput>(null)
   const { group } = useRoute().params as RouteParams
   const navigation = useNavigation()
+  const [isLoading, setIsLoading] = useState(true)
 
   async function handleAddPlayer() {
     if (newPlayer.trim().length === 0) {
@@ -81,8 +83,10 @@ export function Players() {
 
   async function fetchPlayersByTeam() {
     try {
+      setIsLoading(true)
       const playersByTeam = await getPlayersByGroupAndTeam(group, team)
       setPlayers(playersByTeam)
+      setIsLoading(false)
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert(error.message)
@@ -124,21 +128,25 @@ export function Players() {
         />
         <PlayersNumb>{players.length}</PlayersNumb>
       </HeaderList>
-      <FlatList
-        data={players}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <PlayerCard
-            name={item.name}
-            onRemove={() => {
-              handleRemovePlayer(item.name)
-            }}
-          />
-        )}
-        ListEmptyComponent={() => <ListEmpty message='Não há pessoas nessse time.' />}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={[{ paddingBottom: 100 }, players.length === 0 && { flex: 1 }]}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={players}
+          keyExtractor={(item) => item.name}
+          renderItem={({ item }) => (
+            <PlayerCard
+              name={item.name}
+              onRemove={() => {
+                handleRemovePlayer(item.name)
+              }}
+            />
+          )}
+          ListEmptyComponent={() => <ListEmpty message='Não há pessoas nessse time.' />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[{ paddingBottom: 100 }, players.length === 0 && { flex: 1 }]}
+        />
+      )}
       <Button title='Remover Turma' variant='SECONDARY' onPress={handleGroupRemove} />
     </Container>
   )
