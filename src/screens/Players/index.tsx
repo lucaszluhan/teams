@@ -147,7 +147,7 @@ export function Players() {
           contentContainerStyle={[{ paddingBottom: 100 }, players.length === 0 && { flex: 1 }]}
         />
       )}
-      <Button title='Remover Turma' variant='SECONDARY' onPress={handleGroupRemove} />
+      <Button title='Remover turma' variant='SECONDARY' onPress={handleGroupRemove} />
     </Container>
   )
 }
