@@ -2,8 +2,8 @@ import { Container } from './style'
 import { InputProps } from './type'
 import { useTheme } from 'styled-components/native'
 
-export function Input({ ...rest }: InputProps) {
+export function Input({ inputRef, ...rest }: InputProps) {
   const { COLORS } = useTheme()
 
-  return <Container placeholderTextColor={COLORS.GRAY_300} {...rest} />
+  return <Container ref={inputRef} placeholderTextColor={COLORS.GRAY_300} {...rest} />
 }

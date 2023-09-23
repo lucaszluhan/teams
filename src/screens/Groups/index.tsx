@@ -1,9 +1,8 @@
 import { Button, GroupCard, Header, Highlight, ListEmpty } from '@components/index'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { groupsGetAll } from '@storage/group/groupsGetAll'
-import { AppError } from '@utils/AppError'
 import { useCallback, useState } from 'react'
-import { Alert, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 import { Container } from './style'
 
 export function Groups() {
@@ -23,6 +22,10 @@ export function Groups() {
     }
   }
 
+  function handleOpenGroup(group: string) {
+    navigation.navigate('players', { group })
+  }
+
   useFocusEffect(
     useCallback(() => {
       fetchGroups()
@@ -36,7 +39,7 @@ export function Groups() {
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <GroupCard title={item} />}
+        renderItem={({ item }) => <GroupCard title={item} onPress={() => handleOpenGroup(item)} />}
         ListEmptyComponent={() => <ListEmpty message='Que tal cadastrar uma turma?' />}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
       />
