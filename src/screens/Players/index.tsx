@@ -86,7 +86,6 @@ export function Players() {
       setIsLoading(true)
       const playersByTeam = await getPlayersByGroupAndTeam(group, team)
       setPlayers(playersByTeam)
-      setIsLoading(false)
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert(error.message)
@@ -94,6 +93,8 @@ export function Players() {
         console.log(error)
         Alert.alert('Get Players by Team', 'Nao foi possivel pegar jogadores por time.')
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
